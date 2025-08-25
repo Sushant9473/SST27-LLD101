@@ -1,6 +1,7 @@
 public class Demo08 {
     public static void main(String[] args) {
-        Vehicle v = new Bicycle();
-        v.startEngine(); // crash
+        PedalVehicle v = new Bicycle();
+        v.pedal(10);
+        // v.startEngine(); // compile-time error: PedalVehicle does not have startEngine
     }
 }
