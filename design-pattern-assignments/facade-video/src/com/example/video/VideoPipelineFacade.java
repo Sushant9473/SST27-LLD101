@@ -1,0 +1,35 @@
+package com.example.video;
+
+import java.nio.file.Path;
+
+public class VideoPipelineFacade {
+    private Decoder decoder;
+    private FilterEngine filterEngine;
+    private Encoder encoder;
+    private SharpenAdapter sharpenAdapter;
+
+    public VideoPipelineFacade() {
+        this.decoder = new Decoder();
+        this.filterEngine = new FilterEngine();
+        this.encoder = new Encoder();
+        this.sharpenAdapter = new SharpenAdapter();
+    }
+
+    public Path process(Path src, Path out, boolean gray, Double scale, Integer sharpenStrength) {
+        Frame[] frames = decoder.decode(src);
+
+        if (gray) {
+            frames = filterEngine.grayscale(frames);
+        }
+
+        if (scale != null) {
+            frames = filterEngine.scale(frames, scale);
+        }
+
+        if (sharpenStrength != null) {
+            frames = sharpenAdapter.sharpen(frames, sharpenStrength);
+        }
+
+        return encoder.encode(frames, out);
+    }
+}

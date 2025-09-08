@@ -24,5 +24,5 @@ Wire `App` to accept a CSV path and print a summary.
 ```bash
 cd adapter-csv-import/src
 javac com/example/imports/*.java
-java com.example.imports.App users.csv
+java com.example.imports.App ../users.csv
 ```
